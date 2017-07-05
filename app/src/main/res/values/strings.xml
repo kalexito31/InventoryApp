@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+    <!-- Name for the application [CHAR LIMIT=12] -->
+    <string name="app_name">Game Inventory</string>
+
+    <!-- Label for overflow menu option that inserts fake pet data into the app [CHAR LIMIT=20] -->
+    <string name="action_insert_dummy_data">Insert Dummy Data</string>
+
+    <!-- Label for overflow menu option that deletes all games data in the app [CHAR LIMIT=20] -->
+    <string name="action_delete_all_entries">Delete All Games</string>
+
+    <!-- Title text for the empty view, which describes the empty dog house image [CHAR LIMIT=50] -->
+    <string name="empty_view_title_text">It\'s a bit empty here...</string>
+
+    <!-- Subtitle text for the empty view that prompts the user to add a game [CHAR LIMIT=50] -->
+    <string name="empty_view_subtitle_text">Get started by adding a game</string>
+
+    <!-- Title for the activity to add a new game [CHAR LIMIT=20] -->
+    <string name="editor_activity_title_new_game">Add a Game</string>
+
+    <!-- Title for the activity to edit an existing pet [CHAR LIMIT=20] -->
+    <string name="editor_activity_title_edit_game">Edit Game</string>
+
+    <!-- Label for editor menu option to save a game and leave editor [CHAR LIMIT=20] -->
+    <string name="action_save">Save</string>
+
+    <!-- Label for editor overflow menu option that deletes the current game [CHAR LIMIT=20] -->
+    <string name="action_delete">Delete</string>
+
+    <!-- Toast message in editor when new game has been successfully inserted [CHAR LIMIT=NONE] -->
+    <string name="editor_insert_game_successful">Game stored</string>
+
+    <!-- Toast message in editor when new game has failed to be inserted [CHAR LIMIT=NONE] -->
+    <string name="editor_insert_game_failed">Error with saving game</string>
+
+    <!-- Toast message in editor when current game was successfully updated [CHAR LIMIT=NONE] -->
+    <string name="editor_update_game_successful">Game updated</string>
+
+    <!-- Toast message in editor when current pet has failed to be updated [CHAR LIMIT=NONE] -->
+    <string name="editor_update_game_failed">Error with updating game</string>
+
+    <!-- Dialog message when user is leaving editor but hasn't saved changes [CHAR LIMIT=NONE] -->
+    <string name="unsaved_changes_dialog_msg">Discard your changes and quit editing?</string>
+
+    <!-- Dialog button text for the option to discard a user's changes [CHAR LIMIT=20] -->
+    <string name="discard">Discard</string>
+
+    <!-- Dialog button text for the option to keep editing the current game [CHAR LIMIT=20] -->
+    <string name="keep_editing">Keep Editing</string>
+
+    <!-- Toast message in editor when current game was successfully deleted [CHAR LIMIT=NONE] -->
+    <string name="editor_delete_game_successful">Game deleted</string>
+
+    <!-- Toast message in editor when current game has failed to be deleted [CHAR LIMIT=NONE] -->
+    <string name="editor_delete_game_failed">Error with deleting game</string>
+
+    <!-- Dialog message to ask the user to confirm deleting the current game [CHAR LIMIT=NONE] -->
+    <string name="delete_dialog_msg">Delete this game?</string>
+
+    <!-- Dialog button text for the option to confirm deleting the current game [CHAR LIMIT=20] -->
+    <string name="delete">Delete</string>
+
+    <!-- Dialog button text for the option to cancel deletion of the current game [CHAR LIMIT=20] -->
+    <string name="cancel">Cancel</string>
+
+    <!-- Label for overview category of attributes in the editor [CHAR LIMIT=30] -->
+    <string name="category_overview">Overview</string>
+
+    <!-- Label for gender information in the editor [CHAR LIMIT=30] -->
+    <string name="category_genre">Genre</string>
+
+    <!-- Label for measurement information in the editor [CHAR LIMIT=30] -->
+    <string name="category_measurement">Measurement</string>
+
+    <!-- Text hint for name field in the editor [CHAR LIMIT=30] -->
+    <string name="hint_game_name">Name</string>
+
+    <!-- Text hint for genre field in the editor [CHAR LIMIT=30] -->
+    <string name="hint_game_price">Price</string>
+
+    <!-- Text hint for qinStock field in the editor [CHAR LIMIT=30] -->
+    <string name="hint_game_inStock"># In Stock</string>
+
+    <!-- Units for price of the games (dollars) [CHAR LIMIT=5] -->
+    <string name="unit_game_price">dollar(s)</string>
+
+    <!-- Units for quantity of the games (copies) [CHAR LIMIT=5] -->
+    <string name="unit_game_quantity">copies</string>
+
+    <!-- Label for dropdown menu option if the game's genre is unknown [CHAR LIMIT=20] -->
+    <string name="genre_unknown">Unknown</string>
+
+    <!-- Label for dropdown menu option if the genre is action [CHAR LIMIT=20] -->
+    <string name="genre_action">Action</string>
+
+    <!-- Label for dropdown menu option if the genre is action-adventure [CHAR LIMIT=20] -->
+    <string name="genre_action_adventure">Action-Adventure</string>
+
+    <!-- Label for dropdown menu option if the genre is adventure [CHAR LIMIT=20] -->
+    <string name="genre_adventure">Adventure</string>
+
+    <!-- Label for dropdown menu option if the genre is role-playing [CHAR LIMIT=20] -->
+    <string name="genre_role_playing">Role-Playing</string>
+
+    <!-- Label for dropdown menu option if the genre is simulation [CHAR LIMIT=20] -->
+    <string name="genre_simulation">Simulation</string>
+
+    <!-- Label for dropdown menu option if the genre is strategy [CHAR LIMIT=20] -->
+    <string name="genre_strategy">Strategy</string>
+
+    <!-- Label for dropdown menu option if the genre is sports [CHAR LIMIT=20] -->
+    <string name="genre_sports">Sports</string>
+
+    <!-- Label for dropdown menu option if the genre is other [CHAR LIMIT=20] -->
+    <string name="genre_other">Other</string>
+
+    <string name="message_in_stock">"In Stock: "</string>
+
+    <string name="dollar_sign">$</string>
+
+    <string name="btn_sell_1_game">Sell 1</string>
+
+    <string name="btn_order_from_supplier">Order More Units From Supplier</string>
+
+    <string name="btn_sell_one_unit">Sell One Unit</string>
+
+    <!-- For ordering more games from the supplier through email-->
+    <string name="email_subject">Order for</string>
+    <string name="hi">Hi,</string>
+    <string name="message">I would like to order more units of the game</string>
+    <string name="thank">Thank you!</string>
+
+
+</resources>
