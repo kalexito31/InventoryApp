@@ -225,7 +225,7 @@ public class GameProvider extends ContentProvider {
         if (values.containsKey(GameContract.GameEntry.COLUMN_GAME_INSTOCK)) {
             // Check that the quantity is greater than or equal to 1
             Integer inStock = values.getAsInteger(GameContract.GameEntry.COLUMN_GAME_INSTOCK);
-            if (inStock != null && inStock < 1) {
+            if (inStock != null && inStock < 0) {
                 throw new IllegalArgumentException("Game requires valid quantity");
             }
         }
@@ -284,8 +284,6 @@ public class GameProvider extends ContentProvider {
         // Return the number of rows deleted
         return rowsDeleted;
     }
-
-
 
     @Override
     public String getType(Uri uri) {

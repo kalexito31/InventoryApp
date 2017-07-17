@@ -13,12 +13,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+
         <RelativeLayout
             android:id="@+id/empty_view"
             android:layout_width="match_parent"
-            android:layout_marginBottom="16dp"
             android:layout_height="200dp"
-            android:layout_centerInParent="false">
+            android:layout_centerInParent="false"
+            android:layout_marginBottom="16dp">
 
             <ImageView
                 android:id="@+id/game_image_view"
@@ -26,17 +27,17 @@
                 android:layout_height="match_parent"
                 android:layout_centerHorizontal="true"
                 android:scaleType="centerInside"
-                android:src="@drawable/ic_launcher"/>
+                android:src="@drawable/ic_launcher" />
 
             <TextView
                 android:id="@+id/add_image_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/game_image_view"
+                android:layout_centerHorizontal="true"
                 android:fontFamily="sans-serif-medium"
                 android:text="Add Game Image Here"
-                android:textAppearance="?android:textAppearanceSmall"
-                android:layout_alignBottom="@+id/game_image_view"
-                android:layout_centerHorizontal="true" />
+                android:textAppearance="?android:textAppearanceSmall" />
 
         </RelativeLayout>
 
@@ -82,7 +83,8 @@
                         android:layout_alignParentStart="true"
                         android:layout_alignParentTop="true"
                         android:hint="@string/hint_game_price"
-                        android:inputType="textCapWords" />
+                        android:inputType="number"
+                        android:maxLength="3" />
 
                     <!-- Units for weight (kg) -->
                     <TextView
@@ -133,7 +135,7 @@
             <!-- Label -->
             <TextView
                 style="@style/CategoryStyle"
-                android:text="@string/category_measurement" />
+                android:text="@string/category_quantity" />
 
             <!-- Input fields -->
             <RelativeLayout
@@ -156,34 +158,34 @@
                     android:id="@+id/edit_game_instock"
                     style="@style/EditorFieldStyle"
                     android:layout_width="match_parent"
-                    android:hint="@string/hint_game_inStock"
-                    android:inputType="number"
-                    android:maxLength="3"
                     android:layout_alignBaseline="@+id/label_weight_units"
                     android:layout_alignBottom="@+id/label_weight_units"
-                    android:layout_toRightOf="@+id/subtract_button"
+                    android:layout_alignEnd="@+id/label_weight_units"
                     android:layout_alignRight="@+id/label_weight_units"
-                    android:layout_alignEnd="@+id/label_weight_units" />
+                    android:layout_toRightOf="@+id/subtract_button"
+                    android:hint="@string/hint_game_inStock"
+                    android:inputType="number"
+                    android:maxLength="3" />
 
                 <Button
                     android:id="@+id/add_button"
                     android:layout_width="30dp"
                     android:layout_height="wrap_content"
-                    android:text="+"
-                    android:layout_alignTop="@+id/edit_game_instock"
                     android:layout_alignParentRight="true"
-                    android:layout_alignParentTop="true" />
+                    android:layout_alignParentTop="true"
+                    android:layout_alignTop="@+id/edit_game_instock"
+                    android:text="+" />
 
                 <TextView
                     android:id="@+id/label_weight_units"
                     style="@style/EditorUnitsStyle"
-                    android:text="@string/unit_game_quantity"
-                    android:layout_marginRight="24dp"
-                    android:layout_marginEnd="24dp"
+                    android:layout_alignParentTop="true"
                     android:layout_centerVertical="true"
+                    android:layout_marginEnd="24dp"
+                    android:layout_marginRight="24dp"
                     android:layout_toLeftOf="@+id/add_button"
                     android:layout_toStartOf="@+id/add_button"
-                    android:layout_alignParentTop="true"/>
+                    android:text="@string/unit_game_quantity" />
             </RelativeLayout>
         </LinearLayout>
 

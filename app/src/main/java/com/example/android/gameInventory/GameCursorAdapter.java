@@ -139,17 +139,26 @@ public class GameCursorAdapter extends CursorAdapter {
                 values.put(GameEntry.COLUMN_GAME_PRICE, gamePrice);
                 values.put(GameContract.GameEntry.COLUMN_GAME_GENRE, gameGenre);
 
-                if(gameInStock>1){
+                if(gameInStock>0){
                     //decrease the quantity by 1
                     int newInStockQuantity = gameInStock-1;
                     values.put(GameEntry.COLUMN_GAME_INSTOCK, newInStockQuantity);
-                    Toast.makeText(view.getContext(), "You sold 1 copy of "+gameName+".", Toast.LENGTH_SHORT).show();
+
+                    if(gameInStock>1){
+                        //Display message telling user that they sold one copy.
+                        Toast.makeText(view.getContext(), "You sold 1 copy of "+gameName+".", Toast.LENGTH_SHORT).show();
+                    }
+                    else {
+                        //Display message telling user that they sold their last copy.
+                        Toast.makeText(view.getContext(), "You sold your last copy.", Toast.LENGTH_SHORT).show();
+                    }
+
+                    //Update game quantity in database
                     view.getContext().getContentResolver().update(currentGameUri, values, null, null);
                 }
                 else{
-                    //Only have one copy left. Delete game from inventory after selling last copy.
-                    Toast.makeText(view.getContext(), "You sold your last copy.", Toast.LENGTH_SHORT).show();
-                    view.getContext().getContentResolver().delete(currentGameUri, null, null);
+                    //No copies left. Display message telling user there are no more copies.
+                    Toast.makeText(view.getContext(), "You have no more copies to sell.", Toast.LENGTH_SHORT).show();
                 }
             }
         });

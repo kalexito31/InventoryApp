@@ -68,7 +68,7 @@ public class EditorActivity extends AppCompatActivity implements
     private Uri uploadedImage;
 
     /** Boolean to check if the user uploaded an image or not.*/
-    private boolean wasAnImageUploaded = false;
+    private boolean containsImage = false;
 
     /** Image bitmap*/
     private Bitmap imageBitmap;
@@ -132,6 +132,8 @@ public class EditorActivity extends AppCompatActivity implements
         } else {
             // Otherwise this is an existing game, so change app bar to say "Edit Game"
             setTitle(getString(R.string.editor_activity_title_edit_game));
+
+            containsImage = true;
 
             // Initialize a loader to read the game data from the database
             // and display the current values in the editor
@@ -216,7 +218,7 @@ public class EditorActivity extends AppCompatActivity implements
         super.onActivityResult(requestCode, resultCode, data);
 
         if(requestCode == RESULT_LOAD_IMAGE && resultCode == RESULT_OK && data != null){
-            wasAnImageUploaded = true;
+            containsImage = true;
             addImageText.setVisibility(View.GONE);
 
             uploadedImage = data.getData();
@@ -226,7 +228,7 @@ public class EditorActivity extends AppCompatActivity implements
     }
 
     //Convert bitmap to bytes
-    private byte[] profileImage(Bitmap b){
+    public static byte[] convertToByteArray(Bitmap b){
 
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         b.compress(Bitmap.CompressFormat.PNG, 0, bos);
@@ -234,15 +236,13 @@ public class EditorActivity extends AppCompatActivity implements
     }
 
     //Converts "BLOB" into bitmap in order to display the image of the game
-    private Bitmap convertToBitmap(byte[] b){
+    public static Bitmap convertToBitmap(byte[] b){
         return BitmapFactory.decodeByteArray(b, 0, b.length);
     }
 
     //Convert and resize our image to 400dp for faster uploading our images to the database
-    protected Bitmap decodeUri(Uri selectedImage, int REQUIRED_SIZE) {
-
+    public Bitmap decodeUri(Uri selectedImage, int REQUIRED_SIZE) {
         try {
-
             // Decode image size
             BitmapFactory.Options o = new BitmapFactory.Options();
             o.inJustDecodeBounds = true;
@@ -379,22 +379,23 @@ public class EditorActivity extends AppCompatActivity implements
 
         //If not all fields are blank
         //Check if there are any blank fields that are required.
-        //Name and price are required.
+        //Name, Price, and Image are required.
         //Quantity not required. Will be set to 1 by default.
         //Genre of the game is not. Will be set to "Unknown" by default.
-        //Image not required. It is optional.
         if(TextUtils.isEmpty(nameString)){
-            Toast.makeText(this, "Name cannot be empty", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Name cannot be empty.", Toast.LENGTH_SHORT).show();
             return;
         }
 
         if(TextUtils.isEmpty(priceString)){
-            Toast.makeText(this, "Price cannot be empty", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Price cannot be empty.", Toast.LENGTH_SHORT).show();
             return;
         }
 
-
-
+        if(containsImage == false){
+            Toast.makeText(this, "Image required.", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
         // Create a ContentValues object where column names are the keys,
         // and pet attributes from the editor are the values.
@@ -413,8 +414,8 @@ public class EditorActivity extends AppCompatActivity implements
 
         //  Checks if there was an image uploaded. If there was then include in the ContentValues,
         //  else do not include
-        if(wasAnImageUploaded == true && imageBitmap != null){
-            byte[] imageByteArray = profileImage(imageBitmap);
+        if(containsImage == true && imageBitmap != null){
+            byte[] imageByteArray = convertToByteArray(imageBitmap);
             values.put(GameEntry.COLUMN_GAME_IMAGE, imageByteArray);
         }
 

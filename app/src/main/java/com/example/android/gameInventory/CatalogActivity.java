@@ -7,6 +7,8 @@ import android.content.CursorLoader;
 import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -20,6 +22,8 @@ import android.widget.ListView;
 
 import com.example.android.gameInventory.data.GameContract;
 import com.example.android.gameInventory.data.GameContract.GameEntry;
+
+import java.io.ByteArrayOutputStream;
 
 /**
  * Displays list of games that were entered and stored in the app.
@@ -98,6 +102,16 @@ public class CatalogActivity extends AppCompatActivity implements
         values.put(GameContract.GameEntry.COLUMN_GAME_GENRE, GameEntry.GENRE_ACTION_ADVENTURE);
         values.put(GameContract.GameEntry.COLUMN_GAME_INSTOCK, 100);
 
+        //Insert Image from Drawable folder
+        //Get Uri for the image file in the drawable folder
+        //Then Convert it into a bitmap
+        //Then convert it into a byte array since SQLite can only store images as BLOBs
+        //Put byte array into ContentValues
+        Uri imageUri = Uri.parse("android.resource://com.example.android.gameInventory/drawable/pokemon_emerald");
+        Bitmap imageBitmap = decodeUri(imageUri, 400);
+        byte[] imageByteArray = convertToByteArray(imageBitmap);
+        values.put(GameEntry.COLUMN_GAME_IMAGE, imageByteArray);
+
         // Insert a new row for Pokemon Emerald into the provider using the ContentResolver.
         // Use the {@link GameEntry#CONTENT_URI} to indicate that we want to insert
         // into the games database table.
@@ -166,5 +180,53 @@ public class CatalogActivity extends AppCompatActivity implements
     public void onLoaderReset(Loader<Cursor> loader) {
         // Callback called when the data needs to be deleted
         mCursorAdapter.swapCursor(null);
+    }
+
+    //Convert bitmap to bytes
+    public static byte[] convertToByteArray(Bitmap b){
+
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        b.compress(Bitmap.CompressFormat.PNG, 0, bos);
+        return bos.toByteArray();
+    }
+
+    //Converts "BLOB" into bitmap in order to display the image of the game
+    public static Bitmap convertToBitmap(byte[] b){
+        return BitmapFactory.decodeByteArray(b, 0, b.length);
+    }
+
+    //Convert and resize our image to 400dp for faster uploading our images to the database
+    public Bitmap decodeUri(Uri selectedImage, int REQUIRED_SIZE) {
+        try {
+            // Decode image size
+            BitmapFactory.Options o = new BitmapFactory.Options();
+            o.inJustDecodeBounds = true;
+            BitmapFactory.decodeStream(getContentResolver().openInputStream(selectedImage), null, o);
+
+            // The new size we want to scale to
+            // final int REQUIRED_SIZE =  size;
+
+            // Find the correct scale value. It should be the power of 2.
+            int width_tmp = o.outWidth, height_tmp = o.outHeight;
+            int scale = 1;
+            while (true) {
+                if (width_tmp / 2 < REQUIRED_SIZE
+                        || height_tmp / 2 < REQUIRED_SIZE) {
+                    break;
+                }
+                width_tmp /= 2;
+                height_tmp /= 2;
+                scale *= 2;
+            }
+
+            // Decode with inSampleSize
+            BitmapFactory.Options o2 = new BitmapFactory.Options();
+            o2.inSampleSize = scale;
+            return BitmapFactory.decodeStream(getContentResolver().openInputStream(selectedImage), null, o2);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
     }
 }
